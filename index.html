@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>micah rajunov | tic tac toe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Micah Rajunov created this awesome tic tac toe game as a brief coding challenge.">
+    <meta name="author" content="Micah Rajunov">
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+
+    <!-- favorite tininess -->
+    <link rel="shortcut icon" type="image/x-icon"  href="favicon.ico">
+
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+	<script type="text/javascript" src="ttt.js"></script>
+	
+	<style type="text/css">
+		/* Not much CSS, keeping it in the same file */
+		.text-center {
+			text-align: center;
+		}
+		.name { 
+			text-align: center;
+			padding-top: 40px;
+		}
+		.alert {
+			border-radius: 0;
+			position: absolute;
+			top: 325px;
+			left: 0;
+			right: 0;
+			box-shadow: 0px 1px 4px #aaa;
+			border-radius: 0;
+			text-align: center;
+		}
+		.board {
+			margin: 40px auto;
+		}
+		.board td {
+			border: 1px solid #999;
+			height: 100px;
+			width: 100px;
+			text-align: center;
+			
+			font-size: 100px;
+			color: #AA3434;
+		}
+		.board td:hover {
+			background-color: rgba(170, 170, 170, 0.06);
+			cursor: pointer;
+		}
+		.board tr:first-child td {
+			border-top: none;
+		}
+		.board tr:last-child td {
+			border-bottom: none;
+		}
+		.board tr td:first-child {
+			border-left: none;
+		}
+		.board tr td:last-child {
+			border-right: none;
+		}
+		.circle:before {
+			content: "o";
+		}
+		.ex:before {
+		    content: "×";
+		}
+
+	</style>
+</head>
+
+<body>
+<div class="container">
+
+	<h1 class="name">xo</h1>
+	<table class="board">
+		<tr>
+			<td id="sq1"></td>
+			<td id="sq2"></td>
+			<td id="sq3"></td>
+		</tr>
+		<tr>
+			<td id="sq4"></td>
+			<td id="sq5"></td>
+			<td id="sq6"></td>
+		</tr>
+		<tr>
+			<td id="sq7"></td>
+			<td id="sq8"></td>
+			<td id="sq9"></td>
+		</tr>
+	</table>
+
+	<p class="alert lead alert-success hide">
+		You WIN. Go Celebrate!
+	</p>
+	<p class="alert lead alert-error hide">
+		You don't WIN. Try one more time...
+	</p>
+
+	<p class="muted text-center">
+		Doesn't this bring back memories? 
+		Click on a tile to begin playing.
+	</p>
+	
+	<p class="text-center">
+		<a class="btn btn-info reset">One more time...</a>
+	</p>
+	<footer>&copy; 2014 rajunov</footer>
+</div>
+</body>
+
+</html>
