@@ -15,7 +15,7 @@
     <link rel="shortcut icon" type="image/x-icon"  href="favicon.ico">
 
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-
+	<script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
 	<script type="text/javascript" src="ttt.js"></script>
 	
 	<style type="text/css">
@@ -65,10 +65,13 @@
 		.board tr td:last-child {
 			border-right: none;
 		}
-		.circle:before {
+		.board td.win {
+			color: #34AA3D;
+		}
+		.o:before {
 			content: "o";
 		}
-		.ex:before {
+		.x:before {
 		    content: "×";
 		}
 
@@ -81,27 +84,30 @@
 	<h1 class="name">xo</h1>
 	<table class="board">
 		<tr>
-			<td id="sq1"></td>
-			<td id="sq2"></td>
-			<td id="sq3"></td>
+			<td data-position="0"></td>
+			<td data-position="1"></td>
+			<td data-position="2"></td>
 		</tr>
 		<tr>
-			<td id="sq4"></td>
-			<td id="sq5"></td>
-			<td id="sq6"></td>
+			<td data-position="3"></td>
+			<td data-position="4"></td>
+			<td data-position="5"></td>
 		</tr>
 		<tr>
-			<td id="sq7"></td>
-			<td id="sq8"></td>
-			<td id="sq9"></td>
+			<td data-position="6"></td>
+			<td data-position="7"></td>
+			<td data-position="8"></td>
 		</tr>
 	</table>
 
 	<p class="alert lead alert-success hide">
 		You WIN. Go Celebrate!
 	</p>
+	<p class="alert lead alert-info hide">
+		You did not WIN. But you did not LOSE! Try one more time...
+	</p>
 	<p class="alert lead alert-error hide">
-		You don't WIN. Try one more time...
+		You did not WIN. Try one more time...
 	</p>
 
 	<p class="muted text-center">
