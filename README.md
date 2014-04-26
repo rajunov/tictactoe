@@ -14,7 +14,6 @@ Play with the finished product here: http://rajunov.com/tictactoe/index.html
 If you're seriously too lazy to click the link above, here's what it looks like.
 
 
-
 ### Process
 Since this is a coding challenge, I assume you're more interested in knowing _how_ I got here than the fact that I got here at all, so here's the play-by-play.
 
@@ -83,11 +82,5 @@ Since I'm usually working within an existing framework like Angular, it's been a
 My primary focus as a developer is on UI. In 5+ years of mostly front-end coding, the only time I've ever had the need to implement anything remotely resembling an algorithm, I thankfully realized all I needed was [_.shuffle()](http://underscorejs.org/#shuffle) before diving into my own custom Fisher-Yates. So this exercise was a change of pace for me.
 
 Hopefully this shows you that I can code up a decent web app. I also offer a range of product-building services on top of programming, such as design, snark, and fun.
-
-
-
-
-
-
 
 
