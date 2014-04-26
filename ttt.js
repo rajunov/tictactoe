@@ -47,10 +47,11 @@ Board.prototype = {
   // Stores winning sequence and winner
   findWinningSequence : function(who) {
 
-    // use jQuery's .each since it allows breaks
     var win_seq = false
     var that = this
-    _.each(this.win_sequences, function(seq, i){
+    
+    // use jQuery's .each since it allows breaks
+    $.each(this.win_sequences, function(i, seq){
       if( that._matchThree(seq, who) ) {
         win_seq = seq
         return false // break
@@ -59,10 +60,7 @@ Board.prototype = {
 
     return win_seq
   },
-  tie : function() {
-    return this.isFull() && !this.winner
-  },
-  // Marks a move on the board
+  // Makes a move on the board
   move : function(pos, who) {
     if( pos === undefined || pos === null || pos < 0 || pos > 8 )
       console.log('pos='+pos+'. this should not happen. micah made a boo boo')
@@ -108,13 +106,14 @@ Negamax.prototype = {
 
   // Called recursively
   // The meat between the bread
-  _solve : function(board, player, depth) {
+  _solve : function(board, player, depth, alpha, beta) {
 
-    // Check ending conditions
-    if( depth > this.MAX_DEPTH )
-      return 0
-
-    // Returns score if there is a winner
+    // Terminal conditions: no more nodes to examine
+    // Bound with max depth, force terminal condition
+    // if( depth > this.MAX_DEPTH )
+    //   return 0
+    
+    // Winner or board is full is a terminal condition
     var winner = board.getWinner()
     var opponent = board.otherPlayer(player)
     if( winner == player )
@@ -124,9 +123,10 @@ Negamax.prototype = {
     else if( board.isFull() )
       return 0
 
+    // Assign local variables for current node
     var possible_moves = board.getEmptySpaces()
-    var best_scores = []
-    var alpha = this.MIN_VALUE
+    var scores = []
+    var node_value = this.MIN_VALUE
     var that = this
 
     // use jQuery's $.each since it allows break
@@ -136,38 +136,44 @@ Negamax.prototype = {
       subboard.move(position, player)
 
       // Traverse all possible child boards recursively
-      var score = -1 * that._solve(subboard, opponent, depth+1)
-      if( alpha < score )
-        alpha = score
+      // Negamax: Negate the score because it'll be optimized for opponent
+      //   note also alpha and beta are negated and swapped
+      var child_value = -1 * that._solve(subboard, opponent, 
+                                         depth+1, -beta, -alpha)
 
-      // Push the currently calculated score for this possible move
-      if( depth === 0 )
-        best_scores.push({ 'position': position, 'score': score })
+      // If this is a better value for node, record score and position
+      if( child_value >= node_value ) {
+        node_value = child_value
+        scores.push({'position': position, 'score': node_value})
+      }
+
+      // Alpha is the max value so far of all child nodes
+      alpha = Math.max(child_value, alpha)
+      // Pruning: no need to examine the rest of the possible_moves
+      //   because the best value we have so far is already the maximum score
+      if( alpha >= beta )
+        return false;
     })
 
-    // At the root node, pick the next_move with the highest score
-    if( depth === 0 ) {
-      var considered_moves = _.filter(best_scores,
-                                function(s){ return s.score === alpha })
-
-      // Add an element of randomness in case there are many "best" moves
-      var rand = _.sample(considered_moves)
-      this.next_move = rand.position
-    }
-
-    return alpha
+    // Find the first maximum score
+    var max = _.max(scores, function(s){ return s.score })
+    this.next_move = max.position
+    return node_value
   },
 
   // Public function to call
   // Returns position id of next move
   nextMove : function(board, player) {
     this.next_move = -1
-    var score = this._solve(board, player, 0)
+    
+    // Alpha starts off as the worst possible value, beta as the best
+    var alpha = this.MIN_VALUE
+    var beta = this.MAX_VALUE
+    
+    var score = this._solve(board, player, 0, alpha, beta)
     return this.next_move
   }
 };
-
-
 
 
 // Angular would've been overkill here...
@@ -226,8 +232,8 @@ $(function() {
       $('.alert-success').show()
     else if( winner == game.opponent )
       $('.alert-error').show()
-    // this 'if' is extraneous, but good for error checks
-    else if( game.tie() )
+    // A tie!!
+    else
       $('.alert-info').show()
 
     highlightWin( game.findWinningSequence(winner) )
