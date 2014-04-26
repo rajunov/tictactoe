@@ -89,30 +89,21 @@ Board.prototype = {
 
 
 var Negamax = function() {
-  this.MAX_DEPTH = 6
-
+  // They can be anything really
   this.MAX_VALUE = 10
   this.MIN_VALUE = -this.MAX_VALUE
 }
 
+// Negamax, a more efficient variation of minimax that assumes
+//  a zero-sum game (the losses of one player equal the gains of another)
+//  w/ alpha-beta pruning, where is breaks from diving into next branch
+//  if next moves cannot be better than previous ones
 Negamax.prototype = {
-
-  // Uses negamax, a variation of minimax that assumes
-  //   a zero-sum game (the losses of one player equal the gains of another)
-
-  //   TODO: not really alpha-beta pruning here... just kind-of-alpha stuff
-  //   w/ alpha-beta pruning, where is breaks from diving into the branch
-  //   if it realizes the current move cannot be better than a previous one
 
   // Called recursively
   // The meat between the bread
   _solve : function(board, player, depth, alpha, beta) {
 
-    // Terminal conditions: no more nodes to examine
-    // Bound with max depth, force terminal condition
-    // if( depth > this.MAX_DEPTH )
-    //   return 0
-    
     // Winner or board is full is a terminal condition
     var winner = board.getWinner()
     var opponent = board.otherPlayer(player)
@@ -155,7 +146,7 @@ Negamax.prototype = {
         return false;
     })
 
-    // Find the first maximum score
+    // Find the first maximum score and corresponding position
     var max = _.max(scores, function(s){ return s.score })
     this.next_move = max.position
     return node_value
@@ -169,7 +160,7 @@ Negamax.prototype = {
     // Alpha starts off as the worst possible value, beta as the best
     var alpha = this.MIN_VALUE
     var beta = this.MAX_VALUE
-    
+
     var score = this._solve(board, player, 0, alpha, beta)
     return this.next_move
   }
@@ -232,8 +223,7 @@ $(function() {
       $('.alert-success').show()
     else if( winner == game.opponent )
       $('.alert-error').show()
-    // A tie!!
-    else
+    else  // A tie!!
       $('.alert-info').show()
 
     highlightWin( game.findWinningSequence(winner) )
