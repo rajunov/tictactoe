@@ -2,17 +2,17 @@ tic tac toe
 =========
 This is the stuff coding challenges are made of.
 
-### What?
+### What
 Javascript-based tic tac toe game.
 
 Given my target user is someone whose goal is to evaluate my coding competency, I stuck to the basics to demonstrate fundamental coding ability in building a robust UI via the front-end. My methods were to complete the coding challenge in the minimum time possible while closely mimicking the process, tools, and abilities I'd use in my day-to-day work.
 
-#### Where
+### Where
 Play with the finished product here: http://rajunov.com/tictactoe/index.html
 
 #### Screenshots
-If you're seriously too lazy to click the link above, here's what it looks like.
-
+If you're seriously too lazy to click the link above, here's what it looks like:
+![tictactoe](https://cloud.githubusercontent.com/assets/78626/2808246/62900888-cd1a-11e3-8f56-c36b662c2e34.png)
 
 ### Process
 Since this is a coding challenge, I assume you're more interested in knowing _how_ I got here than the fact that I got here at all, so here's the play-by-play.
