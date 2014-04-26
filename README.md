@@ -47,7 +47,7 @@ Finally, it works. And much faster than my previous attempt given the alpha-beta
 ##### Still puzzled...
 However, I noticed a few holes, which are either in my knowledge or in the true accuracy of this algorithm to solve for tic tac toe.
 
-One of the examples I looked at randomized the next move when there were multiple equally "best" scores. I thought this was a nice touch, otherwise the moves are entirely predictable. But, including this with the current implementation resulted in the opponent not always picking the center square as the second move, which is apparently the best move.
+One of the examples I looked at randomized the next move when there were multiple equally "best" scores. I thought this was a nice touch, otherwise the moves are entirely predictable. But, including this with the current implementation resulted in the opponent not always picking the center square as the second move (when it should, namely when player picks a corner first), which is apparently the best move.
 ````
   o | 1 | 2
   3 | x | 5
@@ -55,7 +55,7 @@ One of the examples I looked at randomized the next move when there were multipl
 
   // Randomization wouldn't always choose the center square for x, position 4
 ````
-It turns out, all positions (save one) from the center on have the same score. The center just happens to be the _first_ position that has the maximum score. On the surface, therefore, there doesn't seem to be a valid reason for _why_ the center square is the best move in this scenario, if scores are the same.
+It turns out, most positions (in this scenario: 4, 5, 7, 8) from the center on have the same score. The center just happens to be the _first_ position with the maximum score. On the surface, therefore, there doesn't seem to be a valid reason for _why_ the center square is the best move in this scenario, if scores are the same.
 
 The randomization (randomly) resulted in several win scenarios for me, which shouldn't technically happen ever.
 
