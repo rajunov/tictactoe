@@ -17,22 +17,17 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
 	<script type="text/javascript" src="ttt.js"></script>
-	
+
 	<style type="text/css">
 		/* Not much CSS, keeping it in the same file */
 		.text-center {
 			text-align: center;
 		}
-		.name { 
+		.name {
 			text-align: center;
 			padding-top: 40px;
 		}
 		.alert {
-			position: absolute;
-			top: 325px;
-			left: 0;
-			right: 0;
-			box-shadow: 0px 1px 4px #aaa;
 			border-radius: 0;
 			text-align: center;
 		}
@@ -47,7 +42,7 @@
 			height: 0.5em;
             padding-top: 0.1em;
             padding-bottom: .35em;
-			
+
             text-align: center;
 			font-size: 8em;
 			color: #AA3434;
@@ -80,7 +75,7 @@
         /* Make board a little smaller on your phone */
         @media (max-width: 480px) {
             .board td {
-                font-size: 5em;
+                font-size: 4em;
             }
         }
 
@@ -113,17 +108,18 @@
 		You WIN. Go Celebrate!
 	</p>
 	<p class="alert lead alert-info hide">
-		You did not WIN. But you did not LOSE! Try one more time...
+		You did not WIN. But you did not LOSE! <br/>
+		Try one more time...
 	</p>
 	<p class="alert lead alert-error hide">
 		You did not WIN. Try one more time...
 	</p>
 
 	<p class="muted text-center">
-		Doesn't this bring back memories? 
+		Doesn't this bring back memories?
 		Click on a tile to begin playing.
 	</p>
-	
+
 	<p class="text-center">
 		<a class="btn btn-info reset">One more time...</a>
 	</p>
